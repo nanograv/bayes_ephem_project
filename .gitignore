@@ -1,5 +1,2 @@
-# exclude everything
-data/*
-
-# exception to the rule
-!data/.gitkeep 
+# exclude big data file
+data/bayes_ephem_posteriors.npz
