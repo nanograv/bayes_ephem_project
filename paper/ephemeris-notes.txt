@@ -1,0 +1,53 @@
+% # DE421 (2009)
+% ## Data
+% DE421 incorporates range data through the end of 2007. The data used for DE 421 were preferentially selected for the best accuracy and (for angular data) accuracy of ties to the ICRF.
+% Jupiter data: Pioneer 10/11, Voyager 1/2, Ulysses, Cassini (all 3D radio, through 2000), Galileo (VLBI 1996-1997), CCD (through 2007). The only spacecraft to orbit Jupiter, Galileo, was not able to use the high-gain antenna and so was not able to support range measurements. VLBI measurements of the Galileo spacecraft were made, but with relatively low accuracy due to limitations on the modulations available on the low-gain antenna.
+% Saturn data: Pioneer 11, Voyaget 1/2, Cassini all 3D, through 2006), CCD (through 2007)
+% Uranus: Voyager 2 (1986), CCD, transit
+% Neptune: Voyager 2 (1989), CCD, transit
+% Astrometric data mainly affects the orbital uncertainties of Uranus, Neptune, and Pluto.
+% ## Setup/integration
+% The coordinate time has been scaled such that at the location of Earth the coordinate time has no rate relative to atomic time. The TDB timescale was defined to be consistent with the JPL ephemeris time. The axes of the ephemeris are oriented with the ICRF with accuracy better than 1 milliarcsec (1 mas ≈ 5 nanorad).
+% The Sun GM is by convention a fixed value in units of AU3/day2, and was estimated in units of km3/s2 by solving for the AU in km in the development of DE 421. The mass parameter of the Earth–Moon system was held fixed to a previous LLR-only estimate. The mass parameters for the other planets (planetary systems for planets with natural satellites) were taken from published values derived from spacecraft tracking data.
+% The orbit of the Sun was not integrated in the same way as the orbits of the planets: the position and velocity of the Sun were derived at each integration time step to keep the solar system barycenter at the center of the coordinate system.
+% The Newtonian effects of 67 “major” asteroids and 276 “minor” asteroids that introduce the largest perturbations on the orbit of Mars have been included in the integration of the planetary orbits in an iterative (empirical) manner, with some asteroid masses included in the fit.
+% ## Accuracy
+% The lunar orbit is known to submeter accuracy through fitting lunar laser ranging data.
+% The orbits of Venus, Earth, and Mars are known to subkilometer accuracy (300m through 2008). Because of perturbations of the orbit of Mars by asteroids, frequent updates are needed to maintain the current accuracy into the future decade. **The orbits of Earth and Mars are continually improved through measurements of spacecraft in orbit about Mars.**
+% Mercury’s orbit is determined to an accuracy of several kilometers by radar ranging.
+% The orbits of Jupiter and Saturn are determined to accuracies of tens of kilometers as a result of spacecraft tracking and modern ground-based astrometry. The orbit of Saturn is more accurate than that of Jupiter since the Cassini tracking data are more complete and more accurate than previous spacecraft tracking at Jupiter.
+% The orbits of Uranus, Neptune, and Pluto are not as well determined.
+% ## Outlook
+% Reprocessing of historical observations is expected to lead to improvements in their orbits in the next several years.
+
+% # DE430 (2014)
+% ## Data
+% Mercury through 2011: orbit improved through use of range measurements to the MESSENGER spacecraft after it entered orbit about Mercury.
+% Venus (through 2013), Earth, and Mars (through 2013): orbits improved though additional very long baseline interferometry (VLBI) observations and additional range measurements to Venus Express, Mars Express, Mars Odyssey, and Mars Reconnaissance Orbiter.
+% Jupiter, Uranus, and Neptune: not significantly different from DE421. But Neptune mass different.
+% Saturn (Cassini through 2013): more accurate orbit primarily due to improved treatment of range measurements to the Cassini spacecraft. (For DE421, the process used to determine ranges to Saturn from Cassini data for the first three years after entering orbit about Saturn in 2004 showed systematic effects in range residuals. For DE430, we have used spacecraft orbits that were fit without the range data, allowing the range measurements to be used to determine the orbit of Saturn.)
+% ## Setup/integration
+% Positions and velocities of the Sun, Earth, Moon, and planets, along with the orientation of the Moon, result from a numerically integrated dynamical model. They are stored as Chebyshev polynomial coefficients fit in 32-day-long segments. DE430 also includes Chebyshev polynomial coefficients fit to a numerically integrated difference between ephemeris coordinate time and terrestrial time.
+% Include point-mass/extended-body interactions
+% Perturbations from 343 asteroids have been included in the dynamical model. The asteroid orbits were iteratively integrated with the positions of the planets, the Sun, and the Moon. The set of 343 asteroids is identical to the set used in DE421. The set represents 90 percent of the total mass of the main belt and contains the asteroids with the most significant effects on the orbit of Mars in terms of perturbation amplitude and frequency. The mass of each asteroid was estimated individually.
+% Very long baseline interferometry measurements of spacecraft at Mars allow the orientation of the ephemeris to be tied to the International Celestial Reference Frame (ICRF2 adopted in 2009) with an accuracy of 0.2 mas.
+% The position of the center of mass/energy moves with respect to the origin of the coordinate system by less than 1 mm/century.
+% The location of the barycenter relative to the Sun, Moon, and planets depends on the set of bodies modeled. In particular, inclusion of trans-Neptunian objects such as Sedna and Eris in the ephemerides from the Institute of Applied Astronomy [Russia] causes a difference of the location of the barycenter with respect to the Sun of about 100 km. The change in barycenter does not significantly affect the relative positions of the Sun, Moon, and planets.
+% For ephemerides prior to DE430, the astronomical unit (au) was estimated for each ephemeris, basically enabling conversion of the mass parameter of the Sun from units of au3/day2 to units of km3/s2. The mass parameter of the Sun was defined by GM9 = k2, where Gauss’s constant k = 0.01720209895 is a defined value. With the introduction of the TCB time scale, and with modern data nearly accurate enough to measure the rate of change of GM9, the astronomical unit is now defined to be 149597870.700 km in all time scales. GM9 in units of au3/day2 is now an estimated quantity. For DE430 and DE431, GM9 has been set to k2 since our current estimate is consistent with this value given the current value of the au.
+% ## Accuracy
+% The orbits of the inner planets are known to subkilometer accuracy through fitting radio tracking measurements of spacecraft in orbit about them.
+% The ICRF tie is the limiting error source for the orbits of the terrestrial planets, and corresponds to orbit uncertainties of a few hundred meters. [? relative, absolute ?]
+% The orbits of Jupiter and Saturn are determined to accuracies of tens of kilometers as a result of fitting spacecraft tracking data.
+% The orbits of Uranus, Neptune, and Pluto are determined primarily from astrometric observations, for which measurement uncertainties due to the Earth’s atmosphere, combined with star catalog uncertainties, limit position accuracies to several thousand kilometers.
+
+%
+% https://naif.jpl.nasa.gov/pub/naif/JUNO/kernels/spk/de438s.bsp.lbl
+% JPL planetary and lunar ephmeris DE438
+% Integrated 30 March 2018, based on DE430
+% Compared with DE430, DE438 has signficantly improved orbits for;
+% - Mercury, with ranging data for the entire MESSENGER mission;
+% - Mars, with range and VLBI of Odyssey and MRO through end of 2017
+% - Jupiter, with range from six Juno perijoves (1,3,6,8,10,11) [last in early 2018], and four VLBI observations near perijove, giving accurate measurements of the direction from Earth to Jupiter.
+% - Cassini (Saturn really), with range re-processed following end of mission [Sep 2017]
+% - "With the Juno measurements, the accuracy of the Jupiter ephemeris is conservatively estimated to be at least a factor of four better than previous ephemerides. The assessment of the accuracy is limited by the small number of Juno measurements available, that prevent usual tests for systematic errors by comparing orbits estimated from independent subsets of the data. [...] Future Juno measurements and refinement of the Juno trajectory are expected as the Juno mission continues; these are expected to significantly improve the Jupiter orbit estimate and estimated uncertainty. [...] The formal uncertainty is generally optimistic because it assumes the data have no systematic errors and well-characterized measurement errors. [...] Therefore, since the VLBA data fit within twice the measurement uncertainty and the Ulysses and Juno range data fit to within the assumed 20 m accuracy, we recommend the Juno navigation team use an uncertainty approximately three times the formal uncertainty."
+
