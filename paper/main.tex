@@ -24,6 +24,7 @@
 \usepackage{natbib}
 \usepackage{amsmath,amssymb}
 \usepackage{apjfonts}
+%\usepackage{caption}
 %\usepackage{url}
 
 \usepackage[usenames]{xcolor}
@@ -77,11 +78,11 @@
 % \date{\today}
 
 \begin{abstract}
-The regularity of pulsar emissions becomes apparent once we reference the pulses' times of arrivals to the inertial rest frame of the solar system. It follows that errors in the determination of Earth's position with respect to the solar-system barycenter can appear as a time-correlated bias in pulsar-timing residual time series, affecting the searches for low-frequency gravitational waves performed with pulsar-timing arrays.
+The regularity of pulsar emissions becomes apparent once we reference the pulses' times of arrivals to the inertial rest frame of the solar system. It follows that errors in the determination of Earth's position with respect to the solar-system barycenter can appear as a time-correlated bias in pulsar-timing residual time series, affecting the searches for low-frequency gravitational waves performed with pulsar timing arrays.
 Indeed, recent array datasets yield different gravitational-wave background upper limits and detection statistics when analyzed with different solar-system ephemerides. Crucially, the ephemerides do not generally provide usable error representations.
-In this article we describe the motivation, construction, and application of a physical model of solar-system ephemeris uncertainties, which focus on the degrees of freedom (Jupiter's orbital elements) most relevant to gravitational-wave searches with pulsar timing arrays.
+In this article we describe the motivation, construction, and application of a physical model of solar-system ephemeris uncertainties, which focuses on the degrees of freedom (Jupiter's orbital elements) most relevant to gravitational-wave searches with pulsar timing arrays.
 This model, \textsc{BayesEphem}, was used to derive ephemeris-robust results in NANOGrav's 11-yr stochastic-background search, and it provides a foundation for future searches by NANOGrav and other consortia.
-The analysis and simulations reported here suggest that ephemeris modeling reduces the gravitational-wave sensitivity of the 11-yr dataset; and that this degeneracy will vanish with improved ephemerides and with the longer pulsar-timing datasets that will become available in the near future.
+The analysis and simulations reported here suggest that ephemeris modeling reduces the gravitational-wave sensitivity of the 11-yr dataset; and that this degeneracy will vanish with improved ephemerides and with the longer pulsar timing datasets that will become available in the near future.
 \end{abstract}
 
 %\pacs{Valid PACS appear here}
@@ -95,16 +96,16 @@ The analysis and simulations reported here suggest that ephemeris modeling reduc
 \label{sec:intro}
 
 % What is our place in the Universe? While that question may lie in the philosophical realm for most, it represents a very practical concern for pulsar astronomers
-Pulsar timing exploits the remarkable regularity of millisecond-pulsar emissions to extract accurate system parameters from time-of-arrival (TOA) datasets \citep{2012hpa..book.....L}.
-This is achieved by fitting a precise \emph{timing model}, which accounts for all pulse delays and advances, from generation near the neutron star to detection at the radiotelescope \citep{2013CQGra..30v4001L}.
+Pulsar timing exploits the remarkable regularity of millisecond-pulsar emissions to extract accurate system parameters from time-of-arrival (TOA) datasets \citep{2012hpa..book.....L},
+by fitting precise \emph{timing models} that account for all pulse delays and advances, from generation near the neutron stars to detection at the radiotelescopes \citep{2013CQGra..30v4001L}.
 % Within the precise timing model used to extract physical parameters from pulse time-of-arrival (TOA) datasets, the largest contribution is
-The largest term in the model is the \emph{Roemer delay} \citep{roemer1676} due to the motion of Earth around the solar-system barycenter (SSB). Solar-system ephemerides (SSEs), such as those produced by the Jet Propulsion Laboratory (JPL; see \citealt{2009IPNPR.178C...1F,2014IPNPR.196C...1F,de435,de436,de438}), are used to convert observatory TOAs to the notional coordinate time of an inertial frame centered at the SSB.
+The largest time-dependent term in the model is the \emph{R{\o}mer delay} \citep{Roemer1676} due to the motion of Earth around the solar-system barycenter (SSB), with magnitude $\sim 500$ s. Solar-system ephemerides (SSEs), such as those produced by the Jet Propulsion Laboratory (JPL; see \citealt{2009IPNPR.178C...1F,2014IPNPR.196C...1F,de435,de436,de438}), are used to convert observatory TOAs to the notional coordinate time of an inertial frame centered at the SSB.
 It follows that errors in our estimate of Earth's trajectory around the SSB produce a time-dependent bias in the TOAs.
 
 Throughout many years of pulsar-timing studies and discoveries, SSE errors were always considered negligible compared to all other sources of noise and uncertainty \citep{1990ApJ...361..300F,2006MNRAS.372.1549E}.
 % MV: These are Foster and Backer 1990 (what do they say exactly?) and the tempo2 paper (does it have a budget?)
-TOAs are now being collected with ever greater time spans and timing precisions, especially so by the \emph{pulsar-timing-array} (PTA) collaborations seeking to detect gravitational waves (GWs) as correlated residuals in multi-pulsar datasets \citep{saz78,det79,fb90,ml13,dcl+16,h13,v+16}.
-It was recently suggested that SSE errors could measurably bias GW results obtained from these datasets \citep{2016MNRAS.455.4339T,2019ApJ...876...55R}.
+TOAs are now being collected with ever greater time spans and timing precisions, especially so by the \emph{pulsar-timing-array} (PTA) collaborations seeking to detect gravitational waves (GWs) as correlated residuals (i.e., TOAs minus timing model) in multi-pulsar datasets \citep{saz78,det79,fb90,ml13,dcl+16,h13,v+16}.
+The estimated magnitude of the GW signature is $\sim 100$ ns or less, leading to the recent suggestion that SSE errors could measurably bias GW results obtained from these datasets \citep{2016MNRAS.455.4339T,2019ApJ...876...55R}.
 % maybe: 2013AdSpR..52.1602D - Interplanetary spacecraft navigation using pulsars
 %
 \begin{figure*}[t]
@@ -112,14 +113,17 @@ It was recently suggested that SSE errors could measurably bias GW results obtai
     \includegraphics[width=0.85\textwidth]{figures/GWposterior.pdf}
 \end{center}
 \vspace{-12pt}
-    \caption{Bayesian posterior for the amplitude of the GW stochastic background (modeled as a fixed power law with slope $\gamma = 11/3$), computed for the NANOGrav 11-year dataset using individual JPL ephemerides (dotted lines), and \textsc{BayesEphem} (solid lines).
-    This plot demonstrates that \textsc{BayesEphem} bridges the JPL SSEs successfully; in doing so, it also removes most evidence for the presence of a GW background.
-    The GW model (``model 2A'' in \citealt{2018ApJ...859...47A}) does not include Hellings--Downs correlations, which however modify results only marginally.
-    The low-$A_\mathrm{GWB}$ limit of the posterior can be used to approximate the GW to noise-only Bayes factor by way of the Savage--Dickey formula $P(A_\mathrm{GWB}=0)/P(A_\mathrm{GW}\neq 0) = p(A_\mathrm{GWB}=0|\mathrm{data})/p_\mathrm{prior}(A_\mathrm{GWB}=0)$ \citep{d71}. Values for the Bayes factor and 95\% upper limit on the amplitude of the GW stochastic background calculated from these curves can be found in Table \ref{tab:bf} and \ref{tab:upper}, respectively. We rescale the vertical axis of the logarithmic plot to show these factors. 
+    \caption{(\textbf{left}) Bayesian posteriors for the amplitude $A_\mathrm{GWB}$ of the GW stochastic background, modeled as a fixed power law with slope $\gamma = 11/3$, appropriate for a population of inspiraling and GW-emitting supermassive black-hole binaries. The posteriors are computed for the NANOGrav 11-year dataset using individual JPL ephemerides (dotted lines), and \textsc{BayesEphem} (solid lines). The GW model (``model 2A'' in \citealt{2018ApJ...859...47A}) does not include Hellings--Downs correlations, which however modify results only marginally.
+    The incorporation of explicit SSE uncertainties into the analysis via \textsc{BayesEphem} leads to substantially lower evidence of a GW background, and to much greater consistency among the different SSEs.
+    % This plot demonstrates that \textsc{BayesEphem} bridges the JPL SSEs successfully; in doing so, it also removes most evidence for the presence of a GW background.
+    (\textbf{right}) Same posteriors as in the left panel, shown with a logarithmic vertical scale that can be mapped to approximate GW vs.\ noise-only Bayes factors, by way of the Savage--Dickey formula $P(A_\mathrm{GWB}=0)/P(A_\mathrm{GW}\neq 0) = p(A_\mathrm{GWB}=0|\mathrm{data})/p_\mathrm{prior}(A_\mathrm{GWB}=0)$ \citep{d71}.
+    The application of \textsc{BayesEphem} brings all Bayes factors close to unity, indicating no evidence for GWs once SSE uncertainties are taken into consideration.
+    Bayes factors and 95\% $A_\mathrm{GWB}$  upper limits calculated from these curves are listed in Tables \ref{tab:bf} and \ref{tab:upper}.
+    % We rescale the vertical axis of the logarithmic plot on the right to show these factors. 
     \label{fig:posteriors}}
 \end{figure*}
 
-We encountered this bias firsthand in early 2017, when we observed that switching between the more recent SSEs issued by JPL (specifically DE421, DE430, DE435, and DE436: \citealt{2009IPNPR.178C...1F,2014IPNPR.196C...1F,de435,de436}) led to discrepant results (GW upper limits and detection statistics) in the search for a stochastic signal from the population of supermassive black-hole binaries, formed in the centers of galaxies following major-merger events, as performed on the NANOGrav 11-year dataset \citep{2018ApJS..235...37A,2018ApJ...859...47A}.
+Within the North American Nanohertz Observatory for Gravitational Waves (NANOGrav), we encountered this bias firsthand in early 2017, when we observed that switching between the more recent SSEs issued by JPL (specifically DE421, DE430, DE435, and DE436: \citealt{2009IPNPR.178C...1F,2014IPNPR.196C...1F,de435,de436}) led to discrepant results (GW upper limits and detection statistics) in the search for a stochastic signal from the population of supermassive black-hole binaries, formed in the centers of galaxies following major-merger events, as performed on the NANOGrav 11-year dataset \citep{2018ApJS..235...37A,2018ApJ...859...47A}.
 See Fig.\ \ref{fig:posteriors} for the Bayesian posterior probabilities of the GW-background (GWB) amplitude, as obtained with a range of SSEs. We verified that other recent PTA results \citep{2015Sci...349.1522S,2016ApJ...821...13A} would be similarly affected.
 
 In this article we report on \textsc{BayesEphem}, the physical model of SSE uncertainties that we developed and integrated with the NANOGrav GW analysis so that we could produce SSE-robust results \citep{2018ApJ...859...47A} by marginalizing our Bayesian statistics over the SSE model parameters. 
@@ -139,14 +143,14 @@ in Sec.\ \ref{sec:simulations} we present simulations that probe the reduction i
 in Sec.\ \ref{sec:othermodels} we discuss other approaches toward SSE uncertainty modeling;
 last, in Sec.\ \ref{sec:conclusion} we offer our brief conclusions.  
 
-\section{The solar-system ephemerides}
+\section{Solar-system ephemerides}
 \label{sec:sses}
 
 To derive the JPL SSEs\footnote{\href{https://ssd.jpl.nasa.gov/?ephemerides}{https://ssd.jpl.nasa.gov/?ephemerides}} (and similarly for the French INPOP\footnote{\href{https://www.imcce.fr/inpop}{https://www.imcce.fr/inpop}} and Russian EPM\footnote{\href{http://iaaras.ru/en/dept/ephemeris/epm}{http://iaaras.ru/en/dept/ephemeris/epm}}),
 the orbits of the Sun, the planets, and a large number of asteroids are fit to heterogeneous datasets collected over the last few decades. Measurement techniques include spacecraft ranging and Doppler tracking, direct planetary radar ranging, very-large-baseline interferometry of spacecraft, and (for the Moon) the laser ranging of retroreflectors left by the Apollo missions (see \citealt{verma2013} for a review). The masses of minor bodies are also fit, while the masses of the planets are held fixed to values determined from spacecraft tracking, by fitting orbits for the bodies in each planetary system \citep{jh+2000,2006AJ....132.2520J,2014AJ....148...76J,2009AJ....137.4322J}.
 
 The parameters of the fit are the initial conditions (``epoch'' positions and velocities) for all the bodies (as well as minor-body masses); from these, orbits are integrated numerically, providing a reference solution used to compute measurement residuals.
-The integration is repeated with minor displacements in all fit parameters, yielding variational \emph{partials} for the orbits. The fit parameters are then corrected by finding the linear combination of the partials that minimizes the residuals in least-squares fashion, and the scheme is repeated until it converges (see, e.g., \citealt{1983A&A...125..150N}).
+The integration is repeated with minor displacements in all fit parameters, yielding variational \emph{partials} for the orbits. The fit parameters are then corrected by finding the linear combination of the partials that minimizes the residuals in least-squares fashion, and the scheme is repeated until the solution converges (see, e.g., \citealt{1983A&A...125..150N}).
 
 The most complex aspect of the process is the modeling of observations for datasets that are both varied in technique and unique to each planet and each new spacecraft \citep{moyer2003}---a Sisyphean task. Because it is difficult to assign realistic uncertainties to many of the measurements (and, perhaps more importantly, to estimate their systematic errors), the \emph{formal} errors and covariances estimated with the least-squares procedure are considered unreliable, and are not published with the best-fit orbits. Instead, orbit accuracy is assessed by analyzing model residuals and by comparing estimates that use different subsets of the data \citep{de434cov,de438}.
 
@@ -154,11 +158,11 @@ In this paper we work with the four JPL SSEs used to analyze the NANOGrav 11-yea
 %
 \begin{description}
 %
-\item[DE421 \citep{2009IPNPR.178C...1F}] was published in 2009, based on data through 2007. The orbits of the inner planets are known to sub-km accuracy, those of Jupiter and Saturn to tens of km; Uranus, Neptune, and Pluto are not well determined. The axes of the ephemeris are oriented with the International Celestial Reference Frame \citep{Ma_1998} with accuracy $\lesssim 1$ mas.
+\item[DE421 \citep{2009IPNPR.178C...1F}] was published in 2009, based on data through 2007. The orbits of the inner planets are known to sub-km accuracy, those of Jupiter and Saturn to tens of km; Uranus and Neptune not well determined. The axes of the ephemeris are oriented with the International Celestial Reference Frame \citep{Ma_1998} with accuracy $\lesssim 1$ mas.
 %
 \item[DE430 \citep{2014IPNPR.196C...1F}] was published in 2014, based on data through 2013. Orbit integration relies on a more sophisticated dynamical model. The Saturn orbit is more accurate thanks to the improved treatment of range measurements to the Cassini spacecraft \citep{PhysRevD.89.102002}.
 % A nice discussion of the Cassini solution, with details about the SSE process
-The axes of the ephemeris are oriented with the 2009 update of the International Celestial Reference Frame \citep{2015AJ....150...58F} with accuracy $\lesssim 0.2$ mas, which represents the limiting error source for the inner planets, corresponding to orbit uncertainties of a few hundred meters. The Jupiter and Saturn orbits are determined to tens of km; those of Uranus, Neptune, and Pluto (which are constrained mainly by astrometric measurements) to thousands of km. 
+The axes of the ephemeris are oriented with the 2009 update of the International Celestial Reference Frame \citep{2015AJ....150...58F} with accuracy $\lesssim 0.2$ mas, which represents the limiting error source for the inner planets, corresponding to orbit uncertainties of a few hundred meters. The Jupiter and Saturn orbits are determined to tens of km; those of Uranus and Neptune (which are constrained mainly by astrometric measurements) to thousands of km. 
 %
 \item[DE435 \citep{de435}] was published in 2016; it improves the Saturn orbit using Cassini data through 2015, correcting it by $\sim 1.5$ km. The Jupiter orbit had been updated (by $\sim 50$ km) in the 2015 DE434 ephemeris \citep{de434} by reprocessing data from six spacecraft flybys, and adding data from the New Horizons flyby. In DE435, the Jupiter orbit is tweaked further (by $\sim 20$ km) by reweighting the datasets. These changes are deemed ``consistent'' with the estimated orbit uncertainties \citep{de434,de435}.
 %
@@ -168,21 +172,22 @@ The axes of the ephemeris are oriented with the 2009 update of the International
 %
 \end{description}
 
-Across these ephemerides, the orbit of Earth relative to the Sun is consistent at the $10$-m level, after applying an overall rotation with respect to the International Celestial Reference Frame (within the uncertainties of that ``tie''), and a rotation \emph{rate} about the ecliptic pole \footnote{\label{footnote:rate}This accounts for differences in the estimated semi-major axis of the Earth-Moon--barycenter orbit, which gives rise to a linear rate in estimated ecliptic longitude.}.
-However, the orbit of the Sun and therefore the orbit of Earth (both relative to the SSB) match only at the $100$-m level across ephemerides (see Fig.\ \ref{fig:earthsun}). This discrepancy arises from the estimated positions of Jupiter, Saturn, Uranus, and Neptune. Using a simple dynamical model of the SS (i.e., integrating the equations of Newtonian gravity for the eight planets and the Sun), it is easy to show that if we perturb the masses or the orbits of the outer planets, we affect the Sun-to-SSB and Earth-to-SSB trajectories through the resulting redefinition of the SSB, rather than through changes in their gravitational pull (see also \citealt{2019MNRAS.489.5573G}).
+Across these ephemerides, the orbit of Earth relative to the Sun is consistent at the $3$-m ($\sim 10$-ns) level, after applying an overall rotation with respect to the International Celestial Reference Frame (within the uncertainties of that ``tie''), and a rotation \emph{rate} about the ecliptic pole\footnote{\label{footnote:rate}This accounts for differences in the estimated semi-major axis of the Earth-Moon--barycenter orbit, which gives rise to a linear rate in estimated ecliptic longitude.}.
+However, the orbit of the Sun and therefore the orbit of Earth (both relative to the SSB) match only at the $100$-m ($\sim 300$-ns) level across ephemerides (see Fig.\ \ref{fig:earthsun}). This discrepancy arises from the estimated positions of Jupiter, Saturn, Uranus, and Neptune. Using a simple dynamical model of the SS (i.e., integrating the equations of Newtonian gravity for the eight planets and the Sun), it is easy to show that if we perturb the masses or the orbits of the outer planets, we affect the Sun-to-SSB and Earth-to-SSB trajectories through the resulting redefinition of the SSB, rather than through the very minor changes in the gravitational pull of the outer planets (see also \citealt{2019MNRAS.489.5573G}).
 %
 \begin{figure}[t]
     \centering
     \includegraphics[width=\columnwidth]{figures/EarthSunDiff.pdf}
     \includegraphics[width=\columnwidth]{figures/SunSSBDiff.pdf}
-    \caption{Differences in $\mathbf{r}^{(3)} - \mathbf{r}^\mathrm{Sun}$ and $\mathbf{r}^\mathrm{Sun} - \mathbf{r}^\mathrm{SSB}$ between pairs of JPL SSEs. We plot SSE equatorial-coordinate differences over the approximate span of NANOGrav's 11-yr dataset, and we apply the best-fit frame rotation that minimizes the 3D norm of the difference. Dotted curves are zoomed $\times 10$ vertically. Dotted vertical lines mark the end of the DE421 and DE430 fitted datasets.
+    \caption{Differences in Earth $-$ Sun position, $\mathbf{r}^{(3)} - \mathbf{r}^\mathrm{Sun}$, and in Sun $-$ SSB position, $\mathbf{r}^\mathrm{Sun} - \mathbf{r}^\mathrm{SSB}$, between pairs of JPL SSEs. Note the difference in the vertical scale of the two panels. We plot SSE equatorial-coordinate differences over the approximate span of NANOGrav's 11-yr dataset, and we apply the best-fit frame rotation that minimizes the 3D norm of the difference. Dotted curves are zoomed $\times 10$ vertically. Dotted vertical lines mark the end of the DE421 and DE430 fitted datasets.
     For clarity, we also remove a $\sim 100$-m mean in each coordinate in the Sun--SSB differences; such a constant offset does not affect PTA likelihoods.
+    For reference, 2.5~m $\approx$ 8~ns, and 0.1~km $\approx$ 300~ns, bracketing the range of amplitudes expected for GW signals in PTA datasets.
     \label{fig:earthsun}}
 \end{figure}
 
 The last few JPL ephemerides focus on Jupiter and Saturn, as motivated by the navigation needs of JPL missions to those planets. In DE421 to DE436, Saturn's orbit is known better than Jupiter's, because the Cassini tracking data is more complete and accurate than was possible for previous spacecraft. In particular, the high-gain antenna of Jupiter orbiter Galileo failed to deploy, leading to low-accuracy measurements. Data from the Juno spacecraft, which has been orbiting Jupiter since July 2016, appears to improve the Jupiter ephemeris substantially \citep{2009IPNPR.178C...1F}.
 
-\section{SSE errors as PTA systematics}
+\section{SSE errors as systematics for pulsar timing arrays}
 \label{sec:systematics}
 
 The search for stochastic GW signals with PTAs exploits the distinctive quadrupolar signature in the inter-pulsar correlations of timing-model residuals \citep{hd83}.
@@ -192,30 +197,35 @@ Residuals are obtained after applying a chain of corrections that convert the TO
     t_\mathrm{e}^\mathrm{psr} = t_\mathrm{a}^\mathrm{obs} - \Delta_\odot - \Delta_\mathrm{IS} - \Delta_\mathrm{B},
 \end{equation}
 %
-where $t_\mathrm{e}^\mathrm{psr}$ and $t_\mathrm{a}^\mathrm{obs}$ are the emission and arrival times, $\Delta_\odot$ captures corrections between the observatory and SSB frames, $\Delta_\mathrm{IS}$ describes corrections between the SSB frame and the pulsar-system barycenter, and $\Delta_\mathrm{B}$ models corrections from the pulsar system barycenter to the pulsar frame (which are relevant for binary systems). The largest component of $\Delta_\odot$ is the Roemer delay \citep{roemer1676}, corresponding to the light travel time between the observatory at $\mathbf{r}^\mathrm{obs}$ and the SSB at $\mathbf{r}^\mathrm{SSB}$:
-% MV: the sign here is consistent with the Roemer delay being an actual delay (the pulse takes extra time traveling from SSB-impinging wavefront to observatory)
+where $t_\mathrm{e}^\mathrm{psr}$ and $t_\mathrm{a}^\mathrm{obs}$ are the emission and arrival times, $\Delta_\odot$ captures corrections between the observatory and SSB frames, $\Delta_\mathrm{IS}$ describes corrections between the SSB frame and the pulsar-system barycenter, and $\Delta_\mathrm{B}$ models corrections from the pulsar system barycenter to the pulsar frame (which are relevant for binary systems).
+Among these terms, $\Delta_\mathrm{IS}$ is very large, but changes very slowly over the duration of pulsar datasets, and thus maps to a constant phase offset. Next comes the R{\o}mer delay \citep{Roemer1676}, corresponding to the light travel time ($\sim 500$ s) between the observatory at $\mathbf{r}^\mathrm{obs}$ and the SSB at $\mathbf{r}^\mathrm{SSB}$:
+% MV: the sign here is consistent with the R{\o}mer delay being an actual delay (the pulse takes extra time traveling from SSB-impinging wavefront to observatory)
 %
 \begin{equation}
-\label{eq:roemer}
+\label{eq:Roemer}
 \Delta_{\mathrm{R}\odot} =
 t_\mathrm{a}^\mathrm{obs} - t_\mathrm{a}^\mathrm{SSB} =
--\frac{\bigl(\mathbf{r}^\mathrm{obs}(t_\mathrm{a}^\mathrm{obs}) - \mathbf{r}^\mathrm{SSB}(t_\mathrm{a}^\mathrm{obs})\bigr) \cdot \mathbf{p}}{c},
+-\frac{\bigl(\mathbf{r}^\mathrm{obs}(t_\mathrm{a}^\mathrm{obs}) - \mathbf{r}^\mathrm{SSB}(t_\mathrm{a}^\mathrm{obs})\bigr) \cdot \hat{\mathbf{p}}}{c},
 \end{equation}
 %
-where $\mathbf{p}$ is the unit vector in the direction of the pulsar. Thus, the errors $\delta \mathbf{r}^\mathrm{obs}$ and $\delta \mathbf{r}^\mathrm{SSB}$ induce systematic TOA delays according to Eq.\ \eqref{eq:roemer}.
-Furthermore, the position of the observatory with respect to Earth's barycenter is known to few-cm accuracy \citep{ehm06}, so we may write the systematic Roemer-delay error as
+where $\hat{\mathbf{p}}$ is the unit vector in the direction of the pulsar. In fact, $\hat{\mathbf{p}}$ is determined from pulsar-timing data mainly through the time dependence of Eq.\ \eqref{eq:Roemer}. 
+
+Now, the errors $\delta \mathbf{r}^\mathrm{obs}$ and $\delta \mathbf{r}^\mathrm{SSB}$ induce systematic TOA delays according to Eq.\ \eqref{eq:Roemer}.
+Furthermore, the position of the observatory with respect to Earth's barycenter is known to few-cm (sub-ns) accuracy \citep{ehm06}, so we may write the systematic R{\o}mer-delay error as
 %
 \begin{equation}
 \label{eq:deltar}
-\delta t_{\mathrm{R}\odot} = -\frac{\delta \mathbf{x}^{(3)}(t_\mathrm{a}^\mathrm{obs})\cdot\mathbf{p}}{c},
+\delta t_{\mathrm{R}\odot} = -\frac{\delta \mathbf{x}^{(3)}(t_\mathrm{a}^\mathrm{obs})\cdot\hat{\mathbf{p}}}{c},
 \end{equation}
 %
-where $\mathbf{x}^{(3)}(t)$ is the terrestrial barycenter's position in the SSE frame where the SSB is identified with the origin, and $\delta \mathbf{x}^{(3)}(t)$ is the systematic error (a function of time) in the SSE's estimate of $\mathbf{x}^{(3)}(t)$.
+where $\mathbf{x}^{(3)}(t)$ is the terrestrial barycenter's position in the SSE frame where the SSB is identified with the origin, and $\delta \mathbf{x}^{(3)}(t)$ is the systematic error (a function of time) in the SSE's estimate of $\mathbf{x}^{(3)}(t)$. Here and below we index the solar-system planets from Mercury to Neptune as $(1)$ through $(8)$, so Earth is $(3)$.
 
-The time dependence of the SSE errors is essential to the effect of the ensuing residuals on GW searches in PTA data. Constant offsets, as well as linear and quadratic trends, are absorbed by redefinitions of the timing-model parameters that describe the intrinsic spin evolution of the pulsar; in other words, the TOA likelihood is affected only by $\delta t_{\mathrm{R}\odot}$ minus the best-fitting quadratic polynomial \footnote{In a Bayesian context there is no single best-fitting polynomial when noise parameters are included in the inference, leading to varying weights for the fit. Nevertheless the subtracted features remain largely irrelevant to parameter posteriors.}. Other free parameters in the timing model yield similar subtractions: most important, an angular misalignment between the SSE frame and the ``true'' sidereal frame can be absorbed by a slight displacement in the position of all pulsars; the corresponding TOA corrections are sinusoidal with periods of one sidereal year.
-Last, GW searches are most sensitive to slow residual variations, with characteristic frequencies on the order of the inverse total time of observation \footnote{This can be understood by noticing that the dominant source of residual noise (``radiometer'' measurement noise) is white, but TOAs are sensitive to time integrals of GW strain, so the effective GW noise grows with frequency.}.
+The time dependence of the SSE errors is essential to the effect of the ensuing residuals on GW searches in PTA data. Constant offsets, as well as linear and quadratic trends, are absorbed by redefinitions of the timing-model parameters that describe the intrinsic spin evolution of the pulsar; in other words, the TOA likelihood is affected only by $\delta t_{\mathrm{R}\odot}$ minus the best-fitting quadratic polynomial\footnote{In a Bayesian context there is no single best-fitting polynomial when noise parameters are included in the inference, leading to varying weights for the fit. Nevertheless the subtracted features remain largely irrelevant to parameter posteriors.}. Other free parameters in the timing model yield similar subtractions: most important, an angular misalignment between the SSE frame and the ``true'' sidereal frame can be absorbed by a slight coherent displacement in the position of all pulsars; the corresponding TOA corrections are sinusoidal with periods of one sidereal year.
 
-As it turns out, the orbits of Jupiter and Saturn are the crucial planets for GW searches in PTA data.  It is true that the larger errors in the Uranus and Neptune orbits and velocities move the SSB by a larger amount: corrections scale as $(m^\mathrm{planet}/m_\mathrm{\odot}) \times |\delta \mathbf{r}|$, so (indexing Mercury--Neptune as 1--8)
+Pulsar timing arrays are most sensitive to GWs with periods of a few to several years, on the order of the total timespan of observations;\footnote{This can be understood by noticing that the dominant source of residual noise (``radiometer'' measurement noise) is white, but TOAs are sensitive to time integrals of GW strain, so the effective GW noise grows with frequency.}
+therefore SSE errors in the orbits of the giant planets, which have comparable periods, could be mistaken for GWs.
+% Conversely, introducing parameters to model SSE errors carries the risk of absorbing actual GW signals.
+Correcting the orbit of a planet by the time-dependent vector $\delta \mathbf{r}(t)$ corresponds to offsetting the SSB position by $(m^\mathrm{planet}/m^\mathrm{SS}) \times \delta \mathbf{r}(t)$, where $m^\mathrm{SS}$ is the total mass in the solar system. We then estimate
 %
 \begin{equation}
     \begin{aligned}
@@ -225,11 +235,11 @@ As it turns out, the orbits of Jupiter and Saturn are the crucial planets for GW
     \end{aligned}
 \end{equation}
 %
-Nevertheless, the longer Uranus and Neptune orbital periods ($P^{(7)} = 84$ y and $P^{(8)} = 165$ y vs.\ $P^{(5)} = 12$ y and $P^{(6)} = 29$ y) ensure that the corresponding $\delta x^\mathrm{SSB}$ appear as linear (or mildly quadratic) TOA trends, which are absorbed by timing models. By contrast, Jupiter and Saturn corrections enter the residuals with variation timescales comparable to the span of the dataset---just where PTAs are most sensitive to GWs.
+While the uncertainties due to Uranus and Neptune are larger, their orbital periods ($P^{(7)} = 84$ yr and $P^{(8)} = 165$ yr) ensure that the corresponding $\delta x^\mathrm{SSB}$ appear as linear or mildly quadratic TOA trends, which are absorbed by timing models (and will continue to be, until PTA datasets approach a century in duration). By contrast, Jupiter and Saturn corrections enter the residuals with timescales ($P^{(5)} = 12$ yr and $P^{(6)} = 29$ yr) comparable to the span of our dataset---just where PTAs are most sensitive to GWs.
 
 Likewise, the absolute location of the SSB is degenerate with the initial phase of the pulses for each pulsar, so we need not worry that the former depends strongly on the set of bodies that are included in each SSE fit. For instance, including trans-Neptunian objects relocates the SSB by $\sim$ 100 km \citep{2014IPNPR.196C...1F}.
 
-\citet{2010ApJ...720L.201C} discuss pulsar-timing's potential to constrain the masses of outer planets. The uncertainties in current IAU best estimates (derived from spacecraft tracking and Doppler studies: \citealt{iaumasses,jh+2000,2006AJ....132.2520J,2014AJ....148...76J,2009AJ....137.4322J}) give rise to Roemer corrections comparable to the orbit errors. To wit, these go as $(\delta m^\mathrm{planet}/m_\mathrm{\odot}) \times |\mathbf{r}|$, so
+\citet{2010ApJ...720L.201C} discuss pulsar-timing's potential to constrain the masses of outer planets. The uncertainties in current IAU best estimates (derived from spacecraft tracking and Doppler studies: \citealt{iaumasses,jh+2000,2006AJ....132.2520J,2014AJ....148...76J,2009AJ....137.4322J}) give rise to R{\o}mer corrections comparable to the orbit errors. To wit, these go as $(\delta m^\mathrm{planet}/m^\mathrm{SS}) \times \mathbf{r}$, so
 %
 \begin{equation}
     \begin{aligned}
@@ -254,22 +264,22 @@ Likewise, the absolute location of the SSB is degenerate with the initial phase 
     \end{aligned}
 \end{equation}
 
-These corrections yield delays with the orbital periods of the corresponding planets, so again they may be observable in PTA datasets for Jupiter and Saturn, but not for Uranus and Neptune.
+These corrections yield delays with the same periods as the corresponding planets, so again they may be observable in PTA datasets for Jupiter and Saturn, but not for Uranus and Neptune.
 % MV: say anything about the decay of accuracy past the end of the data?
 %
 \begin{figure*}[t]
     \centering
     \includegraphics[width=2\columnwidth]{figures/roemerdiff.pdf}
-    \caption{Differences in Roemer delays computed with DE421/DE430/DE435/DE438 and taking DE436 as reference for 100 pulsars distributed across the sky, plotted after subtracting the best-fitting quadratic and yearly sinusoid. The darker curves with various dashing styles allow a comparison of the same pulsars across the three differences. The plot covers the span of the NANOGrav 11-yr dataset.
-    For any given pulsar, these differences are reduced to less than 10 ns after subtracting the best-fitting linear combination of \textsc{BayesEphem} partials, dotted into the pulsar position to obtain Roemer delays.
+    \caption{Differences in R{\o}mer delays computed with DE421/DE430/DE435/DE438 and taking DE436 as reference for 100 simulated pulsars distributed across the sky, plotted after subtracting the best-fitting quadratic and yearly sinusoid. The darker curves with various dashing styles allow a comparison of the same pulsars across the three differences. The plot covers the span of the NANOGrav 11-yr dataset.
+    For any given pulsar, these differences are reduced to less than 10 ns after subtracting the best-fitting linear combination of \textsc{BayesEphem} partials, dotted into the pulsar position to obtain R{\o}mer delays.
     }
-    \label{fig:roemer}
+    \label{fig:Roemer}
 \end{figure*}
 
-In Fig.\ \ref{fig:roemer} we show the difference between Roemer delays for 100 pulsars across the sky, as computed with DE421/DE430/DE435/DE438 and with DE436, which is taken as a reference. (That is, we are plotting the systematic error that we would introduce using the other SSEs \emph{if} DE436 gave exact orbits.) We represent timing-model fits by subtracting the best-fitting quadratics and period--1-yr sinusoids. The plot covers the span of the NANOGrav 11-yr dataset.
-The differences reach $\sim 100$ ns with typical periods $\sim 10$--$12$ y (consistent with a Jovian attribution)---within the sensitivity range and band of GW searches. Indeed, as we see in Fig.\ \ref{fig:posteriors}, the GW-amplitude posteriors for the NANOGrav 11-yr stochastic-background characterization are affected significantly by the choice of SSE.
+In Fig.\ \ref{fig:Roemer} we show the difference between R{\o}mer delays for 100 simulated pulsars across the sky, as computed with DE421/DE430/DE435/DE438 and with DE436, which is taken as a reference. Thus we are plotting the systematic error that we would introduce using the other SSEs \emph{if} DE436 gave exact orbits. We represent timing-model fits by subtracting the best-fitting quadratics and period--1-yr sinusoids. The plot covers the span of the NANOGrav 11-yr dataset.
+The differences reach $\sim 100$ ns with typical periods $\sim 10$--$12$ yr (consistent with a Jovian attribution)---within the sensitivity range and band of GW searches. Indeed, as we see in Fig.\ \ref{fig:posteriors}, the GW-amplitude posteriors for the NANOGrav 11-yr stochastic-background characterization are affected significantly by the choice of SSE.
 
-\section{\textsc{BayesEphem}: a physical model of SSE uncertainties for GW searches in PTA data}
+\section{\textsc{BayesEphem}: a physical model of solar-system-ephemeris uncertainties for gravitational-wave searches in pulsar-timing-array data}
 \label{sec:physical}
 
 We set out to address the sensitivity of the NANOGrav stochastic-background analysis to SSE systematics by developing a parametrized physical model of SSE uncertainties (\textsc{BayesEphem}), so that we can compute robust GW-parameter posteriors by marginalizing over the SSE parameters. 
@@ -281,10 +291,10 @@ Motivated by the discussion of Secs.\ \ref{sec:sses} and \ref{sec:systematics}, 
 %
 \begin{equation}
 \label{eq:massperturb}
-    \delta t_{\mathrm{R}\odot}(\delta m^{(p)}) = -\frac{\delta m^{(p)}}{m^\odot} \frac{\mathbf{x}^{(p)} \cdot \mathbf{p}}{c}.
+    \delta t_{\mathrm{R}\odot}(\delta m^{(p)}) = -\frac{\delta m^{(p)}}{m^\mathrm{SS}} \frac{\mathbf{x}^{(p)} \cdot \mathbf{p}}{c}.
 \end{equation}
 %
-We impose normal Bayesian priors on the $\delta m^{(p)}$, with standard deviation equal to the IAU-adopted mass-estimate uncertainties \citep{iaumasses}. For each pulsar dataset, we compute the $\mathbf{x}(p)$ by evaluating the DE436 SSE at the measured TOAs $\{t_i\}$.
+We impose normal Bayesian priors on the $\delta m^{(p)}$, with standard deviation equal to the IAU-adopted mass-estimate uncertainties \citep{iaumasses}. For each pulsar dataset, we compute the $\mathbf{x}^{(p)}$ by evaluating the DE436 SSE at the measured TOAs $\{t_i\}$.
 % MV: question - different SSEs use different point estimates for the masses... are the prior sigmas sufficient to bridge those?
 %
 \item \textbf{TOA delays generated by a rotation rate about the ecliptic pole} (as needed to absorb Sun-to-Earth orbit differences among SSEs),
@@ -294,7 +304,7 @@ We impose normal Bayesian priors on the $\delta m^{(p)}$, with standard deviatio
     -\frac{(\mathsf{R}^{\hat{z}}(\delta \theta) \cdot \mathbf{x}^{(3)} - \mathbf{x}^{(3)}) \cdot \mathbf{p}}{c} 
 \end{equation}
 %
-where $\delta \theta = r^{\hat{z}} (t - t_0)$, with $t_0$ set at the beginning of the NANOGrav dataset.
+where $\mathsf{R}^{\hat{z}}(\cdot)$ is the appropriately oriented rotation matrix, and $\delta \theta = r^{\hat{z}} (t - t_0)$ is the rotation angle, with $r^{\hat{z}}$ the rate and $t_0$ set at the beginning of the NANOGrav dataset.
 We do not include static rotations of the SSE frame, which are absorbed in the estimated positions of the pulsars.
 We impose uniform Bayesian priors on $r^{\hat{z}}$ that are commensurate with the rotation rates needed to reduce the difference between the JPL SSEs. 
 Given that these rates are very small, we linearize Eq.\ \eqref{eq:rate} with respect to $r^{\hat{z}}$; as for $\delta t_{\mathrm{R}\odot}(\delta m^{(p)})$, we compute $\mathbf{x}^{(3)}$ by evaluating the DE436 at the measured TOAs $\{t_i\}$ for each pulsar dataset.
@@ -303,7 +313,7 @@ Given that these rates are very small, we linearize Eq.\ \eqref{eq:rate} with re
 \begin{equation}
 \label{eq:orbitperturb}
     \delta t_{\mathrm{R}\odot}(\delta a^\mu) = -\delta a^\mu
-    \frac{m^{(5)}}{m^\odot} \frac{\partial \mathbf{x}^{(5)}}{\partial a^\mu} \cdot \frac{\mathbf{p}}{c},
+    \frac{m^{(5)}}{m^\mathrm{SS}} \frac{\partial \mathbf{x}^{(5)}}{\partial a^\mu} \cdot \frac{\mathbf{p}}{c},
 \end{equation}
 %
 where the six $a^\mu$ are the six J2000 Keplerian elements (semimajor axis, eccentricity, inclination, mean longitude, longitude of the perihelion, longitude of the ascending node), and the $\delta a^\mu$ are their perturbations. Alternatively, we can formulate the perturbations in terms of Brouwer and Clemence's ``Set III'' parameters \citep{1961mcm..book.....B}, for which we have access to uncertainty estimates for certain JPL SSEs (\citealt{de434,de438}; see Sec.\ \ref{fig:setIIIposteriors}). The two formulations are largely equivalent with respect to their effect on GW searches.
@@ -316,28 +326,28 @@ where the six $a^\mu$ are the six J2000 Keplerian elements (semimajor axis, ecce
 % longitude of the ascending node (in deg)
 % rates in these units per century -> one of the rates corresponds to the period
 
-To implement the Roemer-delay perturbations, we begin with approximate values for the $a^\mu$ and their rates.\footnote{\href{https://ssd.jpl.nasa.gov/txt/aprx_pos_planets.pdf}{https://ssd.jpl.nasa.gov/txt/aprx\_pos\_planets.pdf}}
+To implement the R{\o}mer-delay perturbations, we begin with approximate values for the $a^\mu$ and their rates of change.\footnote{The six $a^\mu$ plus the rate of change $\dot{a}^4 \equiv \dot{l}$ of mean longitude specify Jupiter's orbit as the osculating ellipse at the J2000 reference epoch (MJD 2451545); the remaining five rates encode the secular evolution of Jupiter's orbit due to SSB bodies other than the Sun, and to other physical effects. See \href{https://ssd.jpl.nasa.gov/txt/aprx_pos_planets.pdf}{https://ssd.jpl.nasa.gov/txt/aprx\_pos\_planets.pdf}.}
 %\citep{ssdelements}.
-We vary these $a^\mu$ to minimize the (root-mean-square) difference between our quasi-Keplerian orbits and DE436, integrated between years 2000 and 2020. The resulting orbits are within 1 second of DE436---a large discrepancy in absolute terms, but less than a 1\% correction for the Jupiter orbits, which ensures similar accuracy for the orbit partials, more than enough for our purposes.
+We vary these $a^\mu$ to minimize the (root-mean-square) difference between our quasi-Keplerian orbits and DE436, integrated between years 2000 and 2020. The resulting orbits are within 1\% of DE436, which ensures similar accuracy for the orbit partials, more than enough for our purposes.
 %
 \begin{figure*}[t]
     \centering
     \includegraphics[width=2\columnwidth]{figures/JupiterPartials.pdf}
     \includegraphics[width=2\columnwidth]{figures/JupiterPartialsSVD.pdf}
-    \caption{Top: perturbative partials for Jupiter's orbit between the years 2000 and 2020, as obtained by varying the six Keplerian elements in a quasi-Keplerian model that includes also their rates. The baseline elements and rates are adjusted to fit DE436 orbits. Bottom: singular-value-decomposition vector time series obtained from the partials in the top panel.}
+    \caption{Top: perturbative partials ($x$, $y$, and $z$ coordinates, geometrized units of seconds) for Jupiter's orbit between the years 2000 and 2020, as obtained by varying the six Keplerian elements in a quasi-Keplerian model that includes also their rates. The baseline elements and rates are adjusted to fit DE436 orbits. Bottom: singular-value-decomposition vector time series obtained from the partials in the top panel.}
     \label{fig:jupiterorbit}
 \end{figure*}
 
-We compute the six partials as finite differences; since they are strongly correlated (see top panel of Fig.\ \ref{fig:jupiterorbit}) and have different scales in their natural units, we decorrelate and normalize them by computing the singular value decomposition $\sum_\nu U_{\mu\nu} S_\nu V_{\nu i k}$ of the matrix $P_{\mu i k} = \partial x^{(5)}_k(t_i)/\partial a^\mu$, and adopting $\partial x^{(5)}_k(t_i)/\partial b^\nu \equiv V_{\nu i k}$ as new orbit partials (see bottom panel of Fig.\ \ref{fig:jupiterorbit}), where $\delta b^\nu = \sum_\mu \delta a^\mu M_{\mu \nu}$ with $M_{\mu \nu} = U_{\mu\nu} S_\nu$ (no summation intended). The resulting units are mixed. We give the orthonormalized coefficients $\delta b^\mu$ uniform priors that are broad enough to generate the range of Roemer variation seen across the JPL SSEs, and to contain the support of the PTA likelihood for the NANOGrav 11-yr dataset. In other words, we make the priors broad enough that the posteriors do not impinge on the boundaries.
+We compute the six partials as finite differences; since they are strongly correlated (see top panel of Fig.\ \ref{fig:jupiterorbit}) and have different scales in their natural units, we decorrelate and normalize them by computing the singular value decomposition $\sum_\nu U_{\mu\nu} S_\nu V_{\nu i k}$ of the matrix $P_{\mu i k} = \partial x^{(5)}_k(t_i)/\partial a^\mu$, and adopting $\partial x^{(5)}_k(t_i)/\partial b^\nu \equiv V_{\nu i k}$ as new orbit partials (see bottom panel of Fig.\ \ref{fig:jupiterorbit}), where $\delta b^\nu = \sum_\mu \delta a^\mu M_{\mu \nu}$ with $M_{\mu \nu} = U_{\mu\nu} S_\nu$ (no summation intended). The resulting units are mixed. We give the orthonormalized coefficients $\delta b^\mu$ uniform priors that are broad enough to generate the range of R{\o}mer variation seen across the JPL SSEs, and to contain the support of the PTA likelihood for the NANOGrav 11-yr dataset. In other words, we make the priors broad enough that the posteriors do not impinge on the boundaries.
 
-We do not include orbital perturbations for Uranus and Neptune, which lead to $\delta t_{\mathrm{R\odot}}$ with linear time dependencies that are absorbed entirely by timing-model parameters. By contrast, we repeat the procedure that we just outlined for Saturn. But, we find that the effect on GW posteriors in NANOGrav's 11-yr dataset are negligible for orbital perturbations comparable to the differences among the JPL SSEs. Thus, we usually exclude Saturn in our use of \textsc{BayesEphem}. However, as datasets increase in length, becoming more comparable with the saturnian period, orbital perturbations of Saturn may prove vital.
+We do not include Uranus and Neptune's orbital perturbations, which lead to $\delta t_{\mathrm{R\odot}}$ with linear time dependencies that are absorbed entirely by timing-model parameters. By contrast, we repeat the procedure that we just outlined for Saturn, but find that GW posteriors are barely affected for orbital perturbations of magnitude comparable to the differences among the JPL SSEs. Thus in our use of \textsc{BayesEphem} we usually omit Saturn orbit perturbations. These may prove more important as datasets increase in length.
 \end{itemize}
 
-These components are brought together into a linear delay model $\delta t_{\mathrm{R}\odot}(c^a)$ written as the product of the eleven-dimensional correction vector $c^a \equiv \{\delta m^{(p)}, \delta r^{\hat{z}}, \delta b^\nu\}$ (with $(p) = 5,6,7,8$ and $\nu = 1, \ldots, 6$) by the $(n_\mathrm{TOAs} \times 11)$-dimensional design matrix $G_{i a}$ with columns defined by the equations in this Section. This model, including variational partials for Keplerian and set-III parametrizations, is available as part of the open-source software package \textsc{Enterprise} \citep{enterprise}.
+The components outlined above are brought together into a linear delay model $\delta t_{\mathrm{R}\odot}(c^a)$ written as the product of the eleven-dimensional correction vector $c^a \equiv \{\delta m^{(p)}, r^{\hat{z}}, \delta b^\nu\}$ (with $(p) = 5,6,7,8$ and $\nu = 1, \ldots, 6$) by the $(n_\mathrm{TOAs} \times 11)$-dimensional design matrix $G_{i a}$ with columns defined by the equations in this Section. This model, including variational partials for Keplerian and set-III parametrizations, is available as part of the open-source software package \textsc{Enterprise} \citep{enterprise}.
 
-It is also possible to treat the linear model as a Gaussian process common to all pulsars, and to marginalize analytically over the $c^a$, by building the effective correlation matrix $G_{i a} \Phi_{ab} G_{j b}$, where $\Phi_{ab}$ is prior covariance of the $c^a$ \citep{vhv14}. The basis vector for each $c^a$ corresponds to the concatenation of the Roemer-delay perturbations that the parameter generates for each pulsar (i.e., the projection of the same vector time series onto different $\mathbf{p}$, at the appropriate TOAs).
+It is also possible to treat the linear model as a Gaussian process common to all pulsars, and to marginalize analytically over the $c^a$, by building the effective correlation matrix $G_{i a} \Phi_{ab} G_{j b}$, where $\Phi_{ab}$ is prior covariance of the $c^a$ \citep{vhv14}. The basis vector for each $c^a$ corresponds to the concatenation of the R{\o}mer-delay perturbations that the parameter generates for each pulsar (i.e., the projection of the same vector time series onto different $\mathbf{p}$, at the appropriate TOAs).
 
-\section{Effect of \textsc{BayesEphem} on the search for stochastic GWs in NANOGrav's 11-yr dataset}
+\section{Effect of \textsc{BayesEphem} on the search for stochastic gravitational waves in NANOGrav's 11-yr dataset}
 \label{sec:results}
 
 To derive the SSE-robust results reported in \cite{2018ApJ...859...47A}, we sampled the \textsc{BayesEphem} corrections $c^a$ alongside the hyperparameters that describe the common GW background and the noise parameters for each pulsar (see Sec.\ 3.4 of \citealt{2018ApJ...859...47A} and Secs.\ 3 and 4 of \citealt{2016ApJ...821...13A}), treating $\delta t_{\mathrm{R}\odot}(c^a)$ as a deterministic correction to the residuals.
@@ -381,18 +391,18 @@ DE438 & $1.94 \times 10^{-15}$ & $1.45 \times 10^{-15}$ & $1.44 \times 10^{-15}$
     \includegraphics[width=2\columnwidth]{figures/setIII-posteriors.pdf}
     \caption{Bayesian posteriors for corrections to Jupiter's ``Set III'' orbital elements, as obtained in \textsc{BayesEphem}'s application to NANOGrav's 11-yr dataset. The solid curves show posteriors obtained by correcting different fiducial SSEs; the dotted curve shows JPL's estimate of uncertainties in Jupiter's osculating orbital elements for DE435 and DE436 \citep{de434}.
     Parameters names follow JPL's orbit-determination package \citep{moyer2003}. % page 3-13
-    Here $\mathrm{DA} \equiv \Delta a/a$, a fractional correction to the semimajor axis of the osculating orbit; $\mathrm{DE} \equiv \Delta e$, a fractional correction to the eccentricity; $\mathrm{DMW} = \Delta M_0 + \Delta w$, $\mathrm{EDW} = e \Delta w$, $\mathrm{DP} = \Delta p$, and $\mathrm{DQ} = \Delta q$, where $M_0$ is the mean anomaly at the initial epoch (conventionally MJD) and $(\Delta p, \Delta q, \Delta w)$ encode a rigid rotation of the orbit, with $\Delta p$ and $\Delta q$ in the orbital plane, and $\Delta w$ normal to it. All corrections are measured in radians, conventionally so for DA and DE.}
+    Here $\mathrm{DA} \equiv \Delta a/a$, a fractional correction to the semimajor axis of the osculating orbit; $\mathrm{DE} \equiv \Delta e$, a fractional correction to the eccentricity; $\mathrm{DMW} = \Delta M_0 + \Delta w$, $\mathrm{EDW} = e \Delta w$, $\mathrm{DP} = \Delta p$, and $\mathrm{DQ} = \Delta q$, where $M_0$ is the mean anomaly at the initial epoch (conventionally MJD 2440400.5) and $(\Delta p, \Delta q, \Delta w)$ encode a rigid rotation of the orbit, with $\Delta p$ and $\Delta q$ in the orbital plane, and $\Delta w$ normal to it. All corrections are measured in radians, conventionally so for DA and DE.}
     \label{fig:setIIIposteriors}
 \end{figure*}
 
-The posterior distributions of the \textsc{BayesEphem} mass perturbations are identical to their IAU priors:  NANOGrav's 11-yr dataset is uninformative compared to current estimates from spacecraft data. Likewise, the frame rotation rate $\delta r^{\hat{z}}$ fills its prior.
+The posterior distributions of the \textsc{BayesEphem} mass perturbations are identical to their IAU priors:  NANOGrav's 11-yr dataset is uninformative compared to current estimates from spacecraft data. Likewise, the frame rotation rate $r^{\hat{z}}$ fills its prior.
 The posterior distributions of the \textsc{BayesEphem} corrections to Jupiter's orbital elements are shown in Fig.\ \ref{fig:setIIIposteriors}, where they are compared to JPL's estimated uncertainties for DE435 and DE436, derived by comparing SSE fits that use independent subsets of the data \citep{de434}. The NANOGrav posteriors appear consistent with all SSEs: they have reasonably high support around the estimated-uncertainty region around $\delta a^\mu = 0$. The least consistent parameters are those involving rotations of the orbital plane (DMW and EDW, see the Fig.\ \ref{fig:setIIIposteriors} caption), as well as the eccentricity (DE) for the oldest SSEs, DE421 and DE430. JPL's estimated uncertainties for DE438 are a factor of $\sim$ four tighter than for DE435/6, but they do not change this picture substantially.
 
-The large dispersion of the \textsc{BayesEphem} posteriors is not unexpected, given that pulsar-timing data is sensitive to Roemer delays in a rather selective fashion (see the discussion of Sec.\ \ref{sec:systematics}).
+The large dispersion of the \textsc{BayesEphem} posteriors is not unexpected, given that pulsar-timing data is sensitive to R{\o}mer delays in a rather selective fashion (see the discussion of Sec.\ \ref{sec:systematics}).
 In terms of uncertainties on Jupiter's instantaneous position, the \textsc{BayesEphem} posteriors map to RMS 3D errors $\sim 100$ km, thus larger than the differences between SSEs. While \textsc{BayesEphem} can bridge NANOGrav 11-yr $A_\mathrm{GW}$ posteriors for different SSEs, the resulting orbital-element posteriors %cannot point to a favored SSE.
 do not identify any specific systematic offset among them.
 
-\section{Assessing GWB detection prospects when using \textsc{BayesEphem}}
+\section{Assessing gravitational-wave-background detection prospects when using \textsc{BayesEphem}}
 \label{sec:simulations}
 
 \textsc{BayesEphem} is designed to model SSE uncertainties \emph{and} systematics, bridging published estimates of Earth's trajectory around the SSB.
@@ -401,26 +411,29 @@ While SSE corrections and the GWB have different spatial-correlation structures,
 It is then natural to ask how the application of \textsc{BayesEphem} may affect GWB detection prospects (sensitivity and time to detection) in the weak-to-intermediate signal-to-noise regime in which spatial correlations among the pulsars carry marginal information.
 To sketch an answer to this question we conducted a set of simulations, which are summarized briefly in \cite{2018ApJ...859...47A} and discussed further here.
 
-To wit, we created multiple synthetic datasets meant to replicate the sensitivity of NANOGrav's 11-yr (really, 11.4-yr) data. We used actual observation epochs for the 34 analyzed pulsars, and extended the time span to 15 years by drawing from distributions conditioned on the last three years of measured data.
+To wit, we created multiple synthetic datasets meant to replicate the sensitivity of NANOGrav's 11-yr (really, 11.4-yr) data. We used actual observation epochs for the 34 analyzed pulsars, and extended the time span to 15 years by drawing observation times from distributions fit to the last three years of measured data.
 We simulated timing residuals by drawing random white- and red-noise deviates at the maximum-a-posteriori 11-yr levels, and again extrapolated to 15 years from the last three of the 11.
-This choice ensures that future data taking is represented with cadence and precision comparable to the end of 2015---a very conservative option given ongoing receiver upgrades and the continuous addition of new pulsars to the PTA.
-We calibrated these noise-only simulations by increasing noise levels until the 11-yr ``slice'' of the data matched the GWB upper limit (specifically model 2A, with uncorrected DE436) of \cite{2018ApJ...859...47A}.
+These choices ensure that future data taking is represented with cadence and precision comparable to the end of 2015---a very conservative option given ongoing receiver upgrades and the continuous addition of new pulsars to the PTA.
 
+We calibrated these noise-only simulations by increasing noise levels until the 11-yr ``slice'' of the data matched the GWB upper limit (specifically the spatially uncorrelated model 2A, with uncorrected DE436) of \cite{2018ApJ...859...47A}.
 All simulated datasets were created by postulating that DE436 was the ``truth.'' We then injected $\gamma = 13/3$ GWBs of various amplitudes, and analyzed both the 11-yr slices and the full 15-yr datasets by taking DE430 as our fiducial SSE, both with and without \textsc{BayesEphem}.
 Our results were as follows.
+
 First, for noise-only datasets without \textsc{BayesEphem}, the systematic offset between DE430 and DE436 is interpreted as a GWB for both 11-yr and 15-yr time spans, with (model 2A vs.\ the noise-only model 1) Bayes ratios of $\sim 2$ and $\sim 20$ respectively. The ratios are reduced to levels consistent with noise fluctuations by the application of \textsc{BayesEphem}.
 %
 \begin{figure}
     \includegraphics{figures/bayesephem_simulations.pdf}
-    \caption{Correlated- vs.\ uncorrelated-GWB Bayes factors (i.e., model 3A vs.\ model 2A) for a set of simulated $15$-yr datasets with GWB injections at increasing amplitude. An analysis of the full datasets (orange lines) as well as their $11.4$ yr ``slices'' (blue) was conducted utilizing both the ``wrong'' ephemeris (dashed) and \textsc{BayesEphem}, to marginalize over SSE errors (solid). A comparison of the solid and dashed lines shows that \textsc{BayesEphem} will not impede the ability of PTAs to make a definitive detection in the near future (see main text).
-    % Adapted from Ref.\ \cite{2018ApJ...859...47A}.
+    \caption{Correlated- vs.\ uncorrelated-GWB Bayes factors (i.e., model 3A vs.\ model 2A), estimated for a set of simulated $15$-yr datasets with GWB injections at increasing amplitudes.
+    The datasets were generated by adopting DE436 as the ``correct'' SSE, and analyzed using both the ``wrong'' DE430 ephemeris (dashed lines) and \textsc{BayesEphem} (solid). The orange and blue lines display results for the full datasets and their 11-yr ``slices,'' respectively.
+    Their comparison indicates that \textsc{BayesEphem} will not impede the ability of PTAs to make a definitive detection in the near future.
+    Figure adapted from \cite{2018ApJ...859...47A}.
     \label{fig:simulations}}
 \end{figure}
 
-Second, as we increase the amplitude of injected GWBs while applying \textsc{BayesEphem}, the Bayes factors remain marginal for the 11-yr dataset, as do model 3A-vs.-model 2A factors, the substantive spatial-correlation test of GW presence. These are shown in Fig.\ \ref{fig:simulations}.
+Second, as we increase the amplitude of injected GWBs while applying \textsc{BayesEphem}, the Bayes factors remain marginal for the 11-yr dataset, as do model 3A-vs.-model 2A factors, the substantive spatial-correlation test of GW presence. The latter are shown in Fig.\ \ref{fig:simulations}.
 The story is different for 15-yr datasets, where the scaling of Bayes factors with injected GWBs in comparable whether or not we apply \textsc{BayesEphem}. Indeed, the longer time span disentangles SSB and GWB correlations, enabling detection even at the astrophysically conservative levels described by Sesana and colleagues \citep{2016MNRAS.463L...6S}.
 
-Is summary, our simulations confirm that SSE errors can produce spurious evidence for GWBs; they suggest that in datasets similar to NANOGrav's 11-yr \textsc{BayesEphem} can overcorrect these biases, suppressing the evidence for a ``true'' GWB; but they imply also that this effect vanishes for longer datasets. Thus, we expect that \textsc{BayesEphem} will not impair detection prospects in the near future---if of course nature grants us a sufficient GWB bounty.
+Is summary, our simulations confirm that SSE errors can produce spurious evidence for GWBs; they suggest that, in datasets similar to NANOGrav's 11-yr, \textsc{BayesEphem} can overcorrect these biases, suppressing the evidence for a ``true'' GWB; but they imply also that this effect vanishes for longer datasets. Thus, we expect that \textsc{BayesEphem} will not impair detection prospects in the near future---if of course nature grants us a sufficient GWB bounty.
 
 \section{Other modeling approaches}
 \label{sec:othermodels}
@@ -429,22 +442,22 @@ In our analysis of NANOGrav's 11-yr dataset, we experimented with other modeling
 %
 \begin{itemize} % [leftmargin=*]
     %
-    \item \textbf{Planetary mass perturbations for outer-SS planets:} modeled as in \cite{2010ApJ...720L.201C} (and as in the first element of \textsc{BayesEphem}, see Sec.\ \ref{sec:physical}), these did not affect our $A_\mathrm{GWB}$ posteriors significantly, whether introduced with best-estimate priors \citep{iaumasses} or with more relaxed assumptions.
+    \item \textbf{Planetary mass perturbations for outer-SS planets:} modeled as in \cite{2010ApJ...720L.201C} (and as in the first element of \textsc{BayesEphem}, see Sec.\ \ref{sec:physical}), these did not affect our $A_\mathrm{GWB}$ posteriors significantly (and therefore did not resolve the discrepancy among SSEs), whether introduced with best-estimate priors \citep{iaumasses} or with more relaxed assumptions.
     %
     \item \textbf{Dipole-correlated Gaussian process:}
-    as proposed in \cite{2016MNRAS.455.4339T}, the Roemer delays for individual pulsars may be treated as Gaussian processes with common power-law or free-spectral priors \citep{vhv14}, and with dipolar spatial correlations between pulsars ($C_{ij} = \cos \theta_{ij}$, with $\theta_{ij}$ the angle between pulsars).
-    We note that this approach is equivalent to modeling the apparent motion of the SSB (or equivalently, the error in Earth's orbit) as three Gaussian processes (along the three spatial axes) with identical uncorrelated priors, and then projecting the vector time series onto the pulsar positions to obtain Roemer delays.
+    as proposed in \cite{2016MNRAS.455.4339T}, the R{\o}mer delays for individual pulsars may be treated as Gaussian processes with common power-law or free-spectral priors \citep{vhv14}, and with dipolar spatial correlations between pulsars ($C_{ij} = \cos \theta_{ij}$, with $\theta_{ij}$ the angle between pulsars).
+    We note that this approach is equivalent to modeling the apparent motion of the SSB (or equivalently, the error in Earth's orbit) as three Gaussian processes (along the three spatial axes) with identical uncorrelated priors, and then projecting the vector time series onto the pulsar positions to obtain R{\o}mer delays.
     
     Dipole-correlated Gaussian processes were included in models 2B, 2C, 3B, and 3C of our 11-yr analysis \citep{2018ApJ...859...47A}.
     It is unclear to us why the approach failed to bridge $A_\mathrm{GWB}$ posteriors across SSEs, but the reason may be related to the choice of Gaussian-process priors appropriate to describe the range and shapes of variations among SSEs.
     %
-    \item \textbf{Roemer mixture:} this phenomenological model describes Earth's orbit as a linear combination of its estimate in multiple SSEs, with mixture coefficients constrained by a Dirichlet prior (see, e.g., \citealt{gelman2013bayesian}). 
+    \item \textbf{R{\o}mer mixture:} this phenomenological model describes Earth's orbit as a linear combination of its estimate in multiple SSEs, with mixture coefficients constrained by a Dirichlet prior (see, e.g., \citealt{gelman2013bayesian}). 
     This approach achieves bridging by construction, but it is difficult to interpret physically.
     In our 11-yr investigation, the posteriors of the mixture coefficients indicated a moderate preference for DE435/6 over DE421 and DE430.
     %
-    \item \textbf{Gaussian process based on numerical partials:} in this approach, SSE corrections are modeled as a finite Gaussian process \citep{williams2006gaussian} in which basis vectors are given by orbit partials (e.g., the change in Earth's orbit as we vary the initial conditions for all the planets), as computed by numerical integration for SSE fits. The priors for the basis weights is given by the formal covariance of the SSE fit parameters. The basis vectors are then projected into Roemer delays for each pulsar.
+    \item \textbf{Gaussian process based on numerical partials:} in this approach, SSE corrections are modeled as a finite Gaussian process \citep{williams2006gaussian} in which basis vectors are given by orbit partials (e.g., the change in Earth's orbit as we vary the initial conditions for all the planets), as computed by numerical integration for SSE fits. The priors for the basis weights is given by the formal covariance of the SSE fit parameters. The basis vectors are then projected into R{\o}mer delays for each pulsar.
     
-    It turns out that only Jupiter and Saturn partials matter to GW results; when restricted to their planets, the approach is effectively equivalent to the orbit-correction sector of \textsc{BayesEphem}---at least for the 11-yr time span, for which numerical partials are very close to analytical osculating-orbit perturbations.
+    It turns out that only Jupiter and Saturn partials matter to GW results; when restricted to these planets, the approach is effectively equivalent to the orbit-correction sector of \textsc{BayesEphem}---at least for the 11-yr time span, for which numerical partials are very close to analytical osculating-orbit perturbations.
 \end{itemize}
 
 \section{Conclusion}
@@ -472,6 +485,7 @@ sophisticated inference techniques and clever high-performance-computing algorit
 
 \emph{Acknowledgments.} \input{acknowledge}
 
+\newpage
 \bibliographystyle{yahapj}
 \bibliography{references}
 
