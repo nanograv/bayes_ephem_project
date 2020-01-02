@@ -1,0 +1,264 @@
+\begin{thebibliography}{}
+\providecommand\natexlab[1]{#1}
+\providecommand\JournalTitle[1]{#1}
+
+\bibitem[{{Arzoumanian} {et~al.}(2016)}]{2016ApJ...821...13A}
+{Arzoumanian}, Z., {et~al.} 2016,
+  \href{http://dx.doi.org/10.3847/0004-637X/821/1/13}{\JournalTitle{\apj}, 821,
+  13}
+
+\bibitem[{{Arzoumanian} {et~al.}(2018{\natexlab{a}})}]{2018ApJS..235...37A}
+---. 2018{\natexlab{a}},
+  \href{http://dx.doi.org/10.3847/1538-4365/aab5b0}{\JournalTitle{Astrophys. J.
+  Supp.}, 235, 37}
+
+\bibitem[{{Arzoumanian} {et~al.}(2018{\natexlab{b}})}]{2018ApJ...859...47A}
+---. 2018{\natexlab{b}},
+  \href{http://dx.doi.org/10.3847/1538-4357/aabd3b}{\JournalTitle{\apj}, 859,
+  47}
+
+\bibitem[{{Brouwer} \& {Clemence}(1961)}]{1961mcm..book.....B}
+{Brouwer}, D., \& {Clemence}, G.~M. 1961, {Methods of celestial mechanics} (New
+  York: Academic Press)
+
+\bibitem[{{Caballero} {et~al.}(2018)}]{2018MNRAS.481.5501C}
+{Caballero}, R.~N., {et~al.} 2018,
+  \href{http://dx.doi.org/10.1093/mnras/sty2632}{\JournalTitle{MNRAS}, 481,
+  5501}
+
+\bibitem[{{Champion} {et~al.}(2010)}]{2010ApJ...720L.201C}
+{Champion}, D.~J., {et~al.} 2010,
+  \href{http://dx.doi.org/10.1088/2041-8205/720/2/L201}{\JournalTitle{\apj},
+  720, L201}
+
+\bibitem[{{Desvignes} {et~al.}(2016)}]{dcl+16}
+{Desvignes}, G., {et~al.} 2016,
+  \href{http://dx.doi.org/10.1093/mnras/stw483}{\JournalTitle{MNRAS}, 458,
+  3341}
+
+\bibitem[{{Detweiler}(1979)}]{det79}
+{Detweiler}, S. 1979,
+  \href{http://dx.doi.org/10.1086/157593}{\JournalTitle{Astrophys. J.}, 234,
+  1100}
+
+\bibitem[{Dickey(1971)}]{d71}
+Dickey, J.~M. 1971,
+  \href{http://www.jstor.org/stable/2958475}{\JournalTitle{The Annals of
+  Mathematical Statistics}, 42, 204}
+
+\bibitem[{{Edwards} {et~al.}(2006{\natexlab{a}}){Edwards}, {Hobbs}, \&
+  {Manchester}}]{2006MNRAS.372.1549E}
+{Edwards}, R.~T., {Hobbs}, G.~B., \& {Manchester}, R.~N. 2006{\natexlab{a}},
+  \href{http://dx.doi.org/10.1111/j.1365-2966.2006.10870.x}{\JournalTitle{MNRAS},
+  372, 1549}
+
+\bibitem[{{Edwards} {et~al.}(2006{\natexlab{b}}){Edwards}, {Hobbs}, \&
+  {Manchester}}]{ehm06}
+---. 2006{\natexlab{b}},
+  \href{http://dx.doi.org/10.1111/j.1365-2966.2006.10870.x}{\JournalTitle{MNRAS},
+  372, 1549}
+
+\bibitem[{{Ellis} {et~al.}(2017){Ellis}, {Vallisneri}, {Taylor}, \&
+  {Baker}}]{enterprise}
+{Ellis}, J.~A., {Vallisneri}, M., {Taylor}, S.~R., \& {Baker}, P.~T. 2017,
+  Enterprise, \url{https://github.com/nanograv/enterprise}
+
+\bibitem[{{Fey} {et~al.}(2015)}]{2015AJ....150...58F}
+{Fey}, A.~L., {et~al.} 2015,
+  \href{http://dx.doi.org/10.1088/0004-6256/150/2/58}{\JournalTitle{Astron.
+  J.}, 150, 58}
+
+\bibitem[{Fienga {et~al.}(2014)Fienga, Manche, Laskar, Gastineau, \&
+  Verma}]{inpop13}
+Fienga, A., Manche, H., Laskar, J., Gastineau, M., \& Verma, A. 2014, INPOP new
+  release: INPOP13b, \href{http://arxiv.org/abs/1405.0484}{{\sffamily
+  arXiv:1405.0484 [astro-ph.EP]}}
+
+\bibitem[{Folkner \& Park(2015)}]{de434cov}
+Folkner, W.~M., \& Park, R.~S. 2015, Uncertainty in the orbit of Jupiter for
+  Juno planning, Tech. Rep. IOM 343R-15-019, Jet Propulsion Laboratory,
+  Pasadena, CA
+
+\bibitem[{Folkner \& Park(2016)}]{de436}
+---. 2016, {JPL planetary and Lunar ephemeris DE436}, online,
+  \url{https://naif.jpl.nasa.gov/pub/naif/JUNO/kernels/spk/de436s.bsp.lbl}
+
+\bibitem[{Folkner \& Park(2018)}]{de438}
+---. 2018, Planetary ephemeris DE438 for Juno, Tech. Rep. IOM 392R-18-004, Jet
+  Propulsion Laboratory, Pasadena, CA
+
+\bibitem[{Folkner {et~al.}(2016)Folkner, Park, \& Jacobson}]{de435}
+Folkner, W.~M., Park, R.~S., \& Jacobson, R.~A. 2016, Planetary ephemeris
+  DE435, Tech. Rep. IOM 392R-16-003, Jet Propulsion Laboratory, Pasadena, CA,
+  \url{ftp://ssd.jpl.nasa.gov/pub/eph/planets/ioms/de435.iom.pdf}
+
+\bibitem[{{Folkner} {et~al.}(2009){Folkner}, {Williams}, \&
+  {Boggs}}]{2009IPNPR.178C...1F}
+{Folkner}, W.~M., {Williams}, J.~G., \& {Boggs}, D.~H. 2009,
+  \href{https://ipnpr.jpl.nasa.gov/progress_report/42-178/178C.pdf}{\JournalTitle{Interplanetary
+  Network Progress Report}, 178, 1}
+
+\bibitem[{{Folkner} {et~al.}(2014){Folkner}, {Williams}, {Boggs}, {Park}, \&
+  {Kuchynka}}]{2014IPNPR.196C...1F}
+{Folkner}, W.~M., {Williams}, J.~G., {Boggs}, D.~H., {Park}, R.~S., \&
+  {Kuchynka}, P. 2014,
+  \href{https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/planets/de430_and_de431.pdf}{\JournalTitle{Interplanetary
+  Network Progress Report}, 196, 1}
+
+\bibitem[{{Foster} \& {Backer}(1990{\natexlab{a}})}]{1990ApJ...361..300F}
+{Foster}, R.~S., \& {Backer}, D.~C. 1990{\natexlab{a}},
+  \href{http://dx.doi.org/10.1086/169195}{\JournalTitle{\apj}, 361, 300}
+
+\bibitem[{{Foster} \& {Backer}(1990{\natexlab{b}})}]{fb90}
+---. 1990{\natexlab{b}},
+  \href{http://dx.doi.org/10.1086/169195}{\JournalTitle{Astrophys. J.}, 361,
+  300}
+
+\bibitem[{Gelman {et~al.}(2013)Gelman, Carlin, Stern, Dunson, Vehtari, \&
+  Rubin}]{gelman2013bayesian}
+Gelman, A., Carlin, J.~B., Stern, H.~S., {et~al.} 2013, Bayesian data analysis
+  (Chapman and Hall/CRC)
+
+\bibitem[{{Guo} {et~al.}(2019){Guo}, {Li}, {Lee}, \&
+  {Caballero}}]{2019MNRAS.489.5573G}
+{Guo}, Y.~J., {Li}, G.~Y., {Lee}, K.~J., \& {Caballero}, R.~N. 2019,
+  \href{http://dx.doi.org/10.1093/mnras/stz2515}{\JournalTitle{MNRAS}, 489,
+  5573}
+
+\bibitem[{Hees {et~al.}(2014)Hees, Folkner, Jacobson, \&
+  Park}]{PhysRevD.89.102002}
+Hees, A., Folkner, W.~M., Jacobson, R.~A., \& Park, R.~S. 2014,
+  \href{http://dx.doi.org/10.1103/PhysRevD.89.102002}{\JournalTitle{Phys. Rev.
+  D}, 89, 102002}
+
+\bibitem[{{Hellings} \& {Downs}(1983)}]{hd83}
+{Hellings}, R.~W., \& {Downs}, G.~S. 1983,
+  \href{http://dx.doi.org/10.1086/183954}{\JournalTitle{Astrophys. J. Lett.},
+  265, L39}
+
+\bibitem[{{Hobbs}(2013)}]{h13}
+{Hobbs}, G. 2013,
+  \href{http://dx.doi.org/10.1088/0264-9381/30/22/224007}{\JournalTitle{Classical
+  and Quantum Gravity}, 30, 224007}
+
+\bibitem[{{Hobbs} \& {Edwards}(2012)}]{2012ascl.soft10015H}
+{Hobbs}, G., \& {Edwards}, R. 2012,
+  \href{https://ascl.net/1210.015}{\JournalTitle{Astrophysics Source Code
+  Library}, ascl:1210.015}
+
+\bibitem[{IAU(2017)}]{iaumasses}
+IAU. 2017, {Division I Working Group on Numerical Standards for Fundamental
+  Astronomy}, online, \url{http://maia.usno.navy.mil/NSFA/NSFA\_cbe.html}
+
+\bibitem[{{Jacobson}(2009)}]{2009AJ....137.4322J}
+{Jacobson}, R.~A. 2009,
+  \href{http://dx.doi.org/10.1088/0004-6256/137/5/4322}{\JournalTitle{Astron.
+  J.}, 137, 4322}
+
+\bibitem[{{Jacobson}(2014)}]{2014AJ....148...76J}
+---. 2014,
+  \href{http://dx.doi.org/10.1088/0004-6256/148/5/76}{\JournalTitle{Astron.
+  J.}, 148, 76}
+
+\bibitem[{Jacobson {et~al.}(2000)Jacobson, Haw, McElrath, \&
+  Antreasian}]{jh+2000}
+Jacobson, R.~A., Haw, R.~J., McElrath, T.~P., \& Antreasian, P.~G. 2000,
+  \JournalTitle{J. Astronaut. Sci.}, 48, 495
+
+\bibitem[{{Jacobson} {et~al.}(2006)}]{2006AJ....132.2520J}
+{Jacobson}, R.~A., {et~al.} 2006,
+  \href{http://dx.doi.org/10.1086/508812}{\JournalTitle{Astron. J.}, 132, 2520}
+
+\bibitem[{{Lommen} \& {Demorest}(2013)}]{2013CQGra..30v4001L}
+{Lommen}, A.~N., \& {Demorest}, P. 2013,
+  \href{http://dx.doi.org/10.1088/0264-9381/30/22/224001}{\JournalTitle{Classical
+  and Quantum Gravity}, 30, 224001}
+
+\bibitem[{{Lorimer} \& {Kramer}(2012)}]{2012hpa..book.....L}
+{Lorimer}, D.~R., \& {Kramer}, M. 2012, {Handbook of Pulsar Astronomy}
+  (Cambridge, UK: Cambridge University Press)
+
+\bibitem[{Ma {et~al.}(1998)Ma, Arias, Eubanks, Fey, Gontier, Jacobs, Sovers,
+  Archinal, \& Charlot}]{Ma_1998}
+Ma, C., Arias, E.~F., Eubanks, T.~M., {et~al.} 1998,
+  \href{http://dx.doi.org/10.1086/300408}{\JournalTitle{The Astronomical
+  Journal}, 116, 516}
+
+\bibitem[{{McLaughlin}(2013)}]{ml13}
+{McLaughlin}, M.~A. 2013,
+  \href{http://dx.doi.org/10.1088/0264-9381/30/22/224008}{\JournalTitle{Classical
+  and Quantum Gravity}, 30, 224008}
+
+\bibitem[{Moyer(2003)}]{moyer2003}
+Moyer, T.~D. 2003, Formulation for Observed and Computed Values of Deep Space
+  Network Data Types for Navigation (New York: Wiley)
+
+\bibitem[{{Newhall} {et~al.}(1983){Newhall}, {Standish}, \&
+  {Williams}}]{1983A&A...125..150N}
+{Newhall}, X.~X., {Standish}, E.~M., \& {Williams}, J.~G. 1983,
+  \JournalTitle{A\&A}, 125, 150
+
+\bibitem[{Park {et~al.}(2015)Park, Folkner, \& Jacobson}]{de434}
+Park, R.~S., Folkner, W.~M., \& Jacobson, R.~A. 2015, The planetary ephemeris
+  DE434, Tech. Rep. IOM 392R-15-018, Jet Propulsion Laboratory, Pasadena, CA,
+  \url{ftp://ssd.jpl.nasa.gov/pub/eph/planets/ioms/de434.iom.pdf}
+
+\bibitem[{{Perera} {et~al.}(2019)}]{2019MNRAS.490.4666P}
+{Perera}, B.~B.~P., {et~al.} 2019,
+  \href{http://dx.doi.org/10.1093/mnras/stz2857}{\JournalTitle{MNRAS}, 490,
+  4666}
+
+\bibitem[{{Roebber}(2019)}]{2019ApJ...876...55R}
+{Roebber}, E. 2019,
+  \href{http://dx.doi.org/10.3847/1538-4357/ab100e}{\JournalTitle{\apj}, 876,
+  55}
+
+\bibitem[{R\o{}mer(1676)}]{Roemer1676}
+R\o{}mer, O.~C. 1676,
+  \href{https://gallica.bnf.fr/ark:/12148/bpt6k56527v/f234.item}{\JournalTitle{Journal
+  des S\c{c}avans}, 11, 233}
+
+\bibitem[{{Sazhin}(1978)}]{saz78}
+{Sazhin}, M.~V. 1978, \JournalTitle{Sov.~Ast.}, 22, 36
+
+\bibitem[{{Sesana} {et~al.}(2016){Sesana}, {Shankar}, {Bernardi}, \&
+  {Sheth}}]{2016MNRAS.463L...6S}
+{Sesana}, A., {Shankar}, F., {Bernardi}, M., \& {Sheth}, R.~K. 2016,
+  \href{http://dx.doi.org/10.1093/mnrasl/slw139}{\JournalTitle{MNRAS}, 463, L6}
+
+\bibitem[{{Shannon} {et~al.}(2015)}]{2015Sci...349.1522S}
+{Shannon}, R.~M., {et~al.} 2015,
+  \href{http://dx.doi.org/10.1126/science.aab1910}{\JournalTitle{Science}, 349,
+  1522}
+
+\bibitem[{{Tiburzi} {et~al.}(2016){Tiburzi}, {Hobbs}, {Kerr}, {Coles}, {Dai},
+  {Manchester}, {Possenti}, {Shannon}, \& {You}}]{2016MNRAS.455.4339T}
+{Tiburzi}, C., {Hobbs}, G., {Kerr}, M., {et~al.} 2016,
+  \href{http://dx.doi.org/10.1093/mnras/stv2143}{\JournalTitle{MNRAS}, 455,
+  4339}
+
+\bibitem[{{van Haasteren} \& {Vallisneri}(2014)}]{vhv14}
+{van Haasteren}, R., \& {Vallisneri}, M. 2014,
+  \href{http://dx.doi.org/10.1103/PhysRevD.90.104012}{\JournalTitle{\prd}, 90,
+  104012}
+
+\bibitem[{{Verbiest} {et~al.}(2016)}]{v+16}
+{Verbiest}, J.~P.~W., {et~al.} 2016,
+  \href{http://dx.doi.org/10.1093/mnras/stw347}{\JournalTitle{MNRAS}, 458,
+  1267}
+
+\bibitem[{Verma(2013)}]{verma2013}
+Verma, A.~K. 2013, PhD thesis, Universit\'e de Franche-Comt\'e, Besan\c{c}on,
+  France
+
+\bibitem[{Viswanathan {et~al.}(2018)Viswanathan, Fienga, Minazzoli, Bernus,
+  Laskar, \& Gastineau}]{inpop17}
+Viswanathan, V., Fienga, A., Minazzoli, O., {et~al.} 2018,
+  \href{http://dx.doi.org/10.1093/mnras/sty096}{\JournalTitle{Monthly Notices
+  of the Royal Astronomical Society}, 476, 1877}
+
+\bibitem[{Williams \& Rasmussen(2006)}]{williams2006gaussian}
+Williams, C.~K., \& Rasmussen, C.~E. 2006, Gaussian processes for machine
+  learning (Cambridge, MA: MIT press)
+
+\end{thebibliography}
