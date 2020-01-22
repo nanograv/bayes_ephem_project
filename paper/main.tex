@@ -140,12 +140,13 @@ Nevertheless, even if DE435 and DE436 are described as having only minor differe
 % DE435 prefers GW-like correlated noise over intrinsic pulsar noise with a Bayes ratio of $\sim 2$, while DE436 yields a ratio $\sim 6$ (see Table \ref{tab:bf}). Neither value is sufficient to claim detection, but the discrepancy is unsatisfactory.
 Thus, uncertainty modeling remains important even if we concentrate on newer SSEs.
 
-This article is organized as follows. In Sec.\ \ref{sec:sses} we summarize the SSE production, and we describe the history and stated accuracy of the JPL SSEs adopted in our work; in Sec.\ \ref{sec:systematics} we discuss the TOA delays induced by SSE errors, which are partially absorbed by the timing model, and we identify Jupiter and Saturn's orbits as the drivers behind GW-posterior discrepancies; in Sec.\ \ref{sec:physical} we formulate \textsc{BayesEphem}, and give details about its implementation in our PTA data-analysis software, \textsc{Enterprise} \citep{enterprise}; in Sec.\ \ref{sec:results} we report on the Bayesian posteriors (for the GW amplitude and for orbital-correction parameters) obtained with \textsc{BayesEphem} for NANOGrav's 11-yr dataset, reproducing and expanding the results of \cite{2018ApJ...859...47A};
+This article is organized as follows. In Sec.\ \ref{sec:sses} we summarize the SSE production, and we describe the history and stated accuracy of the JPL SSEs adopted in our work; in Sec.\ \ref{sec:systematics} we discuss the TOA delays induced by SSE errors, which are partially absorbed by the timing model, and we identify Jupiter and Saturn's orbits as the drivers behind GW-posterior discrepancies; in Sec.\ \ref{sec:physical} we formulate \textsc{BayesEphem}, and give details about its implementation in our PTA data-analysis software, \textsc{Enterprise} \citep{2019ascl.soft12015E}; in Sec.\ \ref{sec:results} we report on the Bayesian posteriors (for the GW amplitude and for orbital-correction parameters) obtained with \textsc{BayesEphem} for NANOGrav's 11-yr dataset, reproducing and expanding the results of \cite{2018ApJ...859...47A};
 in Sec.\ \ref{sec:simulations} we present simulations that probe the reduction in GW sensitivity due to \textsc{BayesEphem};
 in Sec.\ \ref{sec:othermodels} we discuss other approaches toward SSE uncertainty modeling;
 last, in Sec.\ \ref{sec:conclusion} we offer our brief conclusions.  
 
-All computational results presented in this article were obtained with \textsc{Enterprise}  \citep{enterprise}, used in conjunction with the stochastic sampler \textsc{PTMCMCSampler}\footnote{\href{https://github.com/jellis18/PTMCMCSampler}{https://github.com/jellis18/PTMCMCSampler}} and the pulsar-timing package \textsc{Tempo2} \citep{2012ascl.soft10015H}.
+All computational results presented in this article were obtained with \textsc{Enterprise}  \citep{2019ascl.soft12015E}, used in conjunction with the stochastic sampler \textsc{PTMCMCSampler}\footnote{\href{https://github.com/jellis18/PTMCMCSampler}{https://github.com/jellis18/PTMCMCSampler}} and the pulsar-timing package \textsc{Tempo2} \citep{2012ascl.soft10015H}.
+Code that supports all the calculations discussed here and that produces all the figures of this paper is available as a Jupyter notebook at \url{https://github.com/nanograv/11yr_stochastic_analysis}.
 
 \section{Solar-system ephemerides}
 \label{sec:sses}
@@ -342,7 +343,7 @@ We vary these $a^\mu$ to minimize the (root-mean-square) difference between our 
     \includegraphics[width=2\columnwidth]{figures/JupiterPartials.pdf}
     \includegraphics[width=2\columnwidth]{figures/JupiterPartialsSVD.pdf}
     \caption{\textbf{Top}: perturbative partials ($x$, $y$, and $z$ coordinates, geometrized units of seconds) for Jupiter's orbit between the years 2000 and 2020, as obtained by varying the six Keplerian elements in a quasi-Keplerian model that includes also their rates. The baseline elements and rates are adjusted to fit DE436 orbits.
-    Here $a$ is the semimajor axis of the orbit, $e$ the eccentricity, $\i$ the inclination, $\ell$ the mean longitude, $\varomega$ the longitude of the periapsis, and $\Omega$ the longitude of the ascending node. 
+    Here $a$ is the semimajor axis of the orbit, $e$ the eccentricity, $\imath$ the inclination, $\ell$ the mean longitude, $\varomega$ the longitude of the periapsis, and $\Omega$ the longitude of the ascending node. 
     \textbf{Bottom}: singular-value-decomposition vector time series obtained from the partials in the top panel.}
     \label{fig:jupiterorbit}
 \end{figure*}
@@ -352,10 +353,11 @@ We compute the six partials as finite differences; since they are strongly corre
 We do not include Uranus and Neptune's orbital perturbations, which lead to $\delta t_{\mathrm{R\odot}}$ with linear time dependencies that are absorbed entirely by timing-model parameters. By contrast, we repeat the procedure that we just outlined for Saturn, but find that GW posteriors are barely affected for orbital perturbations of magnitude comparable to the differences among the JPL SSEs. Thus in our use of \textsc{BayesEphem} we usually omit Saturn orbit perturbations. These may prove more important as datasets increase in length.
 \end{itemize}
 
-The components outlined above are brought together into a linear delay model $\delta t_{\mathrm{R}\odot}(c^a)$ written as the product of the eleven-dimensional correction vector $c^a \equiv \{\delta m^{(p)}, \omega^{\hat{z}}, \delta b^\nu\}$ (with $(p) = 5,6,7,8$ and $\nu = 1, \ldots, 6$) by the $(n_\mathrm{TOAs} \times 11)$-dimensional design matrix $G_{i a}$ with columns defined by the equations in this Section. This model, including variational partials for Keplerian and set-III parametrizations, is available as part of the open-source software package \textsc{Enterprise} \citep{enterprise}.
+The components outlined above are brought together into a linear delay model $\delta t_{\mathrm{R}\odot}(c^a)$ written as the product of the eleven-dimensional correction vector $c^a \equiv \{\delta m^{(p)}, \omega^{\hat{z}}, \delta b^\nu\}$ (with $(p) = 5,6,7,8$ and $\nu = 1, \ldots, 6$) by the $(n_\mathrm{TOAs} \times 11)$-dimensional design matrix $G_{i a}$ with columns defined by the equations in this Section. This model, including variational partials for Keplerian and set-III parametrizations, is available as part of the open-source software package \textsc{Enterprise} \citep{2019ascl.soft12015E}.
 
 It is also possible to treat the linear model as a Gaussian process common to all pulsars, and to marginalize analytically over the $c^a$, by building the effective correlation matrix $G_{i a} \Phi_{ab} G_{j b}$, where $\Phi_{ab}$ is prior covariance of the $c^a$ \citep{vhv14}. The basis vector for each $c^a$ corresponds to the concatenation of the R{\o}mer-delay perturbations that the parameter generates for each pulsar (i.e., the projection of the same vector time series onto different $\mathbf{p}$, at the appropriate TOAs).
 
+\newpage 
 \section{Effect of \textsc{BayesEphem} on the search for stochastic gravitational waves in NANOGrav's 11-yr dataset}
 \label{sec:results}
 
