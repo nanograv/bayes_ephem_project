@@ -1,0 +1,80 @@
+> This is a very professional and important paper on our ability to detect/limit a
+> gravitational wave background and its covariance with the solar system
+> ephemeris. It requires little or no changes.
+> 
+> I have some very minor grammatical suggestions and a suggestion or two the
+> authors may wish to implement. The authors should be congratulated on producing
+> such an excellent study.
+
+We thank the referee for their kind remarks and useful suggestions. 
+
+> Abstract: This is fine but at the end you say that the degeneracy will soon
+> vanish but don't say exactly why it will vanish. A few words "as pulsar timing
+> baselines extend well beyond a single Jovian orbit" or whatever the cause is
+> would be good.
+
+Good suggestion! Now “...this degeneracy will vanish with improved ephemerides
+and with pulsar-timing datasets that extend well beyond a single Jovian orbital
+period.”
+
+> "radiotelescopes" -> radio telescopes firsthand"-> first-hand
+
+Sure. Perhaps “first hand” is even better here.
+
+> The authors are fond of the expression "to wit" - I don't like it or even know
+> what it means?
+
+We use it to mean “namely”, but in case neither instance is needed.
+
+> page 8 second-last paragraph with linear time dependencies that are absorbed
+> entirely by... -> with linear time dependencies that are *currently* absorbed
+> entirely by…
+
+In fact linear dependencies will always be absorbed, but Uranus and Neptune
+won’t always generate linear corrections. Therefore we changed this to "We do
+not include Uranus and Neptune's orbital perturbations, which currently lead to
+$\delta t_{\mathrm{R\odot}}$ with linear time dependencies that are absorbed
+entirely by timing-model parameters."
+
+> throughout: semimajor axis-> semi-major axis
+
+OK!
+
+> Fig 4 caption that includes also their rates -> that also includes their rates
+
+How about “that includes their rates”?
+
+> final sentence of page 11: Our results were as follows. -> Our results were as
+> follows: (add a colon)
+
+Fine! But then the phrase sits better in the next paragraph.
+
+> Finally, it was historically believed that GWs had a quadrupolar signature and
+> the solar system ephemeris had a dipolar signature and that as a result the two
+> weren't very covariant. (see for example in Manchester et al. (2013): This
+> well-defined 'quadrupolar' signature may be compared with the dipolar signature
+> resulting from an error in the solar-system ephemeris, which effectively is an
+> error in the assumed position of the Earth relative to the SSB, or the monopolar
+> signature resulting from time-standard errors which affect all pulsars equally.)
+> 
+> Perhaps you could add a sentence in the introduction pointing out that this
+> historical belief was premature with 11-yr datasets - how much is longer time
+> series and how much are better ephemerides going to help?
+
+We would say that the confusion (in a measurement sense) among different
+multipoles is not so much due to the short timespan, but to the limited number
+of good pulsars in the dataset. We make this point later in Sec. 6:
+
+"While SSE corrections and the GWB have different spatial-correlation
+"structures, the two may nevertheless remain degenerate when probed by a limited
+"number of PTA pulsars (Roebber 2019).”
+
+The link to the evolving timespan is due to the fact that a dipolar signal
+(Jupiter) moves away from the frequency of highest GW sensitivity, and that more
+“new” pulsars appear in the dataset with timespans of statistical significance.
+
+Nevertheless, it may be good to reiterate the point in the introduction. 
+
+> Fine paper.
+
+Thank you!
